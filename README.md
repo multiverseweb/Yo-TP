@@ -1,15 +1,15 @@
-# 🛡️ Yo!TP
+# Yo!TP
 
 **Email OTP Verification as a Service**
 
 Add email OTP verification to **any website** with a single `<script>` tag.
 No signup, no API keys, no backend configuration required.
 
-[![Visitors](https://api.visitorbadge.io/api/visitors?path=multiverseweb2%2Yo!TP%20&countColor=%23263759&style=flat&initial=5767)](https://github.com/multiverseweb/Yo!TP)
+[![Visitors](https://api.visitorbadge.io/api/visitors?path=multiverseweb2%2Yo!TP%20&countColor=%23263759&style=flat&initial=5767)](https://github.com/multiverseweb/Yo-TP)
 ![License](https://img.shields.io/badge/License-MIT-4e3eb5)
-![Languages](https://img.shields.io/github/languages/count/multiverseweb/Yo!TP?color=20B2AA)
-![GitHub Repo stars](https://img.shields.io/github/stars/multiverseweb/Yo!TP)
-![GitHub last commit](https://img.shields.io/github/last-commit/multiverseweb/Yo!TP)
+![Languages](https://img.shields.io/github/languages/count/multiverseweb/Yo-TP?color=20B2AA)
+![GitHub Repo stars](https://img.shields.io/github/stars/multiverseweb/Yo-TP)
+![GitHub last commit](https://img.shields.io/github/last-commit/multiverseweb/Yo-TP)
 
 ---
 
@@ -18,7 +18,7 @@ No signup, no API keys, no backend configuration required.
 Add this single line to any HTML page to protect it with email OTP verification:
 
 ```html
-<script src="https://YOUR-DOMAIN/static/js/yotp.js"></script>
+<script src="https://yotp.pythonanywhere.com/static/js/yotp.js"></script>
 ```
 
 That's it. When visitors open the page, they'll see a verification overlay asking for their email. They receive a 6-digit OTP valid for 30 seconds. Only after entering the correct code can they access your page.
@@ -107,7 +107,7 @@ Add the script tag to any HTML page:
   <title>My Protected Page</title>
 
   <!-- Add this one line to protect your page -->
-  <script src="https://YOUR-DOMAIN/static/js/yotp.js"></script>
+  <script src="https://yotp.pythonanywhere.com/static/js/yotp.js"></script>
 </head>
 <body>
   <h1>Secret Content</h1>
@@ -203,7 +203,7 @@ Content-Type: application/json
 
 ```bash
 # Clone the repository
-git clone https://github.com/multiverseweb/Yo!TP.git
+git clone https://github.com/multiverseweb/Yo-TP.git
 cd Yo!TP
 
 # Create and activate virtual environment
