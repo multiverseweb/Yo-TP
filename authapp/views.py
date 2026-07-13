@@ -79,7 +79,7 @@ def send_otp(request):
     # Send email
     try:
         send_mail(
-            subject='🔐 Your Verification Code',
+            subject='Yo! Your Verification Code',
             message=(
                 f'Your one-time verification code is: {otp_code}\n\n'
                 f'This code is valid for 30 seconds.\n\n'
@@ -91,7 +91,7 @@ def send_otp(request):
         )
     except Exception as exc:
         return JsonResponse(
-            {'error': 'Failed to send OTP email. Please try again later.'},
+            {'error': f'Failed to send OTP email. Details: {str(exc)}'},
             status=500,
         )
 
@@ -160,3 +160,12 @@ def verify_otp(request):
             {'error': f'Invalid OTP. {remaining} attempt(s) remaining.'},
             status=400,
         )
+
+# ---------------------------------------------------------------------------
+# API: Stats
+# ---------------------------------------------------------------------------
+def get_stats(request):
+    """Return public statistics for the marketing page."""
+    # Since there are no accounts, we track total verification events
+    count = OTPSession.objects.count()
+    return JsonResponse({'total_verifications': count})

@@ -3,3 +3,4 @@ pyotp==2.6.0
 gunicorn
 whitenoise==6.8.2
 django-cors-headers==4.6.0
+python-dotenv==1.2.2

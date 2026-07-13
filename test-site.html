@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Super Secret Website</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            padding: 40px;
+            background: #f0fdf4;
+            color: #166534;
+        }
+
+        .content {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
+    <!-- Drop-in Passwordless OTP -->
+    <script src="https://<your-username>.pythonanywhere.com/static/js/yotp.js"></script>
+</head>
+
+<body>
+    <div class="content">
+        <h1>Welcome to the VIP Club! 🎉</h1>
+        <p>If you can read this text, it means you successfully passed the Yo!TP verification.</p>
+        <p>This is the actual page content that was hidden behind the overlay.</p>
+    </div>
+</body>
+
+</html>

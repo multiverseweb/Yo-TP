@@ -1,19 +1,15 @@
-<div align="center">
-
-# 🛡️ 2FA Guard
+# 🛡️ Yo!TP
 
 **Email OTP Verification as a Service**
 
 Add email OTP verification to **any website** with a single `<script>` tag.
 No signup, no API keys, no backend configuration required.
 
-[![Visitors](https://api.visitorbadge.io/api/visitors?path=multiverseweb2%22FA%20&countColor=%23263759&style=flat&initial=5767)](https://github.com/multiverseweb/2FA)
+[![Visitors](https://api.visitorbadge.io/api/visitors?path=multiverseweb2%2Yo!TP%20&countColor=%23263759&style=flat&initial=5767)](https://github.com/multiverseweb/Yo!TP)
 ![License](https://img.shields.io/badge/License-MIT-4e3eb5)
-![Languages](https://img.shields.io/github/languages/count/multiverseweb/2FA?color=20B2AA)
-![GitHub Repo stars](https://img.shields.io/github/stars/multiverseweb/2FA)
-![GitHub last commit](https://img.shields.io/github/last-commit/multiverseweb/2FA)
-
-</div>
+![Languages](https://img.shields.io/github/languages/count/multiverseweb/Yo!TP?color=20B2AA)
+![GitHub Repo stars](https://img.shields.io/github/stars/multiverseweb/Yo!TP)
+![GitHub last commit](https://img.shields.io/github/last-commit/multiverseweb/Yo!TP)
 
 ---
 
@@ -22,7 +18,7 @@ No signup, no API keys, no backend configuration required.
 Add this single line to any HTML page to protect it with email OTP verification:
 
 ```html
-<script src="https://YOUR-DOMAIN/static/js/2fa-guard.js"></script>
+<script src="https://YOUR-DOMAIN/static/js/yotp.js"></script>
 ```
 
 That's it. When visitors open the page, they'll see a verification overlay asking for their email. They receive a 6-digit OTP valid for 30 seconds. Only after entering the correct code can they access your page.
@@ -53,7 +49,7 @@ That's it. When visitors open the page, they'll see a verification overlay askin
 sequenceDiagram
     participant V as Visitor
     participant W as Your Website
-    participant S as 2FA Guard Service
+    participant S as Yo!TP Service
     participant E as Email (SMTP)
 
     V->>W: Opens your website
@@ -111,7 +107,7 @@ Add the script tag to any HTML page:
   <title>My Protected Page</title>
 
   <!-- Add this one line to protect your page -->
-  <script src="https://YOUR-DOMAIN/static/js/2fa-guard.js"></script>
+  <script src="https://YOUR-DOMAIN/static/js/yotp.js"></script>
 </head>
 <body>
   <h1>Secret Content</h1>
@@ -130,7 +126,7 @@ Add the script tag to any HTML page:
 
 ### No Configuration Needed
 
-The script automatically detects the 2FA Guard service URL from its own `src` attribute. No API keys, no initialization code, no additional configuration.
+The script automatically detects the Yo!TP service URL from its own `src` attribute. No API keys, no initialization code, no additional configuration.
 
 ---
 
@@ -207,8 +203,8 @@ Content-Type: application/json
 
 ```bash
 # Clone the repository
-git clone https://github.com/multiverseweb/2FA.git
-cd 2FA
+git clone https://github.com/multiverseweb/Yo!TP.git
+cd Yo!TP
 
 # Create and activate virtual environment
 python -m venv venv
@@ -248,7 +244,7 @@ Open **[http://127.0.0.1:8000/](http://127.0.0.1:8000/)** to see the landing pag
 4. Configure the service:
    - **Runtime**: Python
    - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `python manage.py migrate --noinput && python manage.py collectstatic --noinput && gunicorn project_2FA.wsgi --bind 0.0.0.0:$PORT`
+   - **Start Command**: `python manage.py migrate --noinput && python manage.py collectstatic --noinput && gunicorn project_yotp.wsgi --bind 0.0.0.0:$PORT`
 5. Add the following **Environment Variables**:
 
    | Variable | Value |
@@ -272,7 +268,7 @@ Open **[http://127.0.0.1:8000/](http://127.0.0.1:8000/)** to see the landing pag
 
 ```bash
 # Build the image
-docker build -t 2fa-guard .
+docker build -t yotp .
 
 # Run the container
 docker run -p 8000:8000 \
@@ -280,7 +276,7 @@ docker run -p 8000:8000 \
   -e EMAIL_PASS=your-app-password \
   -e DJANGO_ALLOWED_HOSTS="localhost 127.0.0.1" \
   -e SECRET_KEY=your-secret-key \
-  2fa-guard
+  yotp
 ```
 
 ---
@@ -313,7 +309,7 @@ flowchart TD
 ## 📁 Project Structure
 
 ```
-2FA/
+Yo!TP/
 ├── authapp/                      # Core application
 │   ├── templates/authapp/
 │   │   └── landing.html          # Marketing / landing page
@@ -322,14 +318,14 @@ flowchart TD
 │   ├── models.py                 # OTPSession model
 │   ├── urls.py                   # API route definitions
 │   └── views.py                  # API views (send-otp, verify-otp)
-├── project_2FA/                  # Django project settings
+├── project_yotp/                  # Django project settings
 │   ├── settings.py               # Settings (CORS, email, static)
 │   ├── urls.py                   # Root URL configuration
 │   ├── wsgi.py                   # WSGI entry point
 │   └── asgi.py                   # ASGI entry point
 ├── static/
 │   ├── js/
-│   │   └── 2fa-guard.js          # ⭐ The guard script (core product)
+│   │   └── yotp.js          # ⭐ The core script (core product)
 │   └── styles/
 │       └── style.css             # Landing page styles
 ├── .dockerignore

@@ -1,10 +1,14 @@
 """
-Django settings for project_2FA project.
+Django settings for project_yotp project.
 
-2FA as a Service — Email OTP verification for any website.
+Passwordless OTP Gateway — Email OTP verification for any website.
 """
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -17,11 +21,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-j^q!6a7(iuu=-fry#71)rl#l+yetikftipz-*9h!5f0#ng8d81')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'True').lower() in ('true', '1', 'yes')
+DEBUG = os.environ.get('DEBUG', 'False').lower() in ('true', '1', 'yes')
 
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "127.0.0.1 localhost", "https://twofa-mo14.onrender.com, https://tejasgupta.work, https://multiverseweb.github.io").split()
+ALLOWED_HOSTS = ['*']  # Allow all hosts for easy deployment
 
-CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS", "http://127.0.0.1:8000").split()
+CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS", "http://127.0.0.1:8000 https://*.pythonanywhere.com").split()
 
 # Application definition
 
@@ -53,7 +57,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_METHODS = ['POST', 'OPTIONS']
 CORS_ALLOW_HEADERS = ['content-type', 'accept', 'origin']
 
-ROOT_URLCONF = 'project_2FA.urls'
+ROOT_URLCONF = 'project_yotp.urls'
 
 TEMPLATES = [
     {
@@ -71,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'project_2FA.wsgi.application'
+WSGI_APPLICATION = 'project_yotp.wsgi.application'
 
 
 # Database
