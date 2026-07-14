@@ -1,4 +1,4 @@
-# Yo-TP
+# Yo!TP
 
 **Email OTP Verification as a Service**
 
@@ -13,7 +13,7 @@ Add email OTP verification to any website with a single `<script>` tag. No signu
 
 ## What It Is
 
-Yo-TP is a drop-in authentication service. When you include the Yo-TP script on your HTML page, the page content is immediately hidden behind a full-screen verification overlay. Visitors must enter their email address to receive a 6-digit Time-Based One-Time Password (TOTP) valid for 30 seconds. Only after entering the correct code is the original page content revealed.
+Yo!TP is a drop-in authentication service. When you include the Yo!TP script on your HTML page, the page content is immediately hidden behind a full-screen verification overlay. Visitors must enter their email address to receive a 6-digit Time-Based One-Time Password (TOTP) valid for 30 seconds. Only after entering the correct code is the original page content revealed.
 
 ## How to Use It
 
@@ -38,7 +38,7 @@ Add the following `<script>` tag to the `<head>` of any HTML page you want to pr
 </html>
 ```
 
-The script will automatically detect the Yo-TP service URL and handle the entire verification flow. Verification status is stored in `sessionStorage`, so refreshing the page will not prompt the visitor again within the same browser session.
+The script will automatically detect the Yo!TP service URL and handle the entire verification flow. Verification status is stored in `sessionStorage`, so refreshing the page will not prompt the visitor again within the same browser session.
 
 ## API Reference
 
@@ -72,7 +72,7 @@ Request payload:
 
 ## Limitations & Security
 
-Yo-TP is a **client-side (JavaScript) protection layer**. It is designed to be a quick, drop-in deterrence for casual use cases (like family blogs, portfolios, or pre-launch pages) where absolute security is not required.
+Yo!TP is a **client-side (JavaScript) protection layer**. It is designed to be a quick, drop-in deterrence for casual use cases (like family blogs, portfolios, or pre-launch pages) where absolute security is not required.
 
 Because the protection runs in the user's browser:
 - **Scraping / Bots:** Bots that do not execute JavaScript (like `curl`, Python scripts, or search engine crawlers) will bypass the overlay and download the raw HTML of your page instantly.
