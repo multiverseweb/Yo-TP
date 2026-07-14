@@ -1,5 +1,5 @@
 /**
- * Yo!TP — Drop-in Email OTP Verification
+ * Yo-TP — Drop-in Email OTP Verification
  * Include this script on any page to require email OTP verification before access.
  *
  * Usage: <script src="https://YOUR-DOMAIN/static/js/yotp.js"></script>
@@ -22,8 +22,14 @@
 
   // ── Check if already verified ──────────────────────────────────────
   if (sessionStorage.getItem(STORAGE_KEY) === "true") {
+    const antiFlash = document.getElementById("__yotp_anti_flash__");
+    if (antiFlash) antiFlash.remove();
     return; // Already verified, let the page load normally
   }
+
+  // ── Prevent Right Click ────────────────────────────────────────────
+  const disableRightClick = (e) => e.preventDefault();
+  document.addEventListener('contextmenu', disableRightClick);
 
   // ── Hide the page ──────────────────────────────────────────────────
   const originalDisplay = document.documentElement.style.display;
@@ -281,7 +287,7 @@
         </div>
 
         <div class="__yotp_powered">
-          Powered by <a href="https://github.com/multiverseweb/Yo-TP" target="_blank" rel="noopener">Yo!TP</a>
+          Powered by <a href="https://github.com/multiverseweb/Yo-TP" target="_blank" rel="noopener">Yo-TP</a>
         </div>
       </div>
     `;
@@ -377,6 +383,9 @@
         overlay.remove();
         document.documentElement.style.visibility = "";
         document.documentElement.style.overflow = "";
+        document.removeEventListener('contextmenu', disableRightClick);
+        const antiFlash = document.getElementById("__yotp_anti_flash__");
+        if (antiFlash) antiFlash.remove();
       }, 400);
     }, 800);
   }
@@ -388,6 +397,8 @@
     // Make page visible again (overlay covers it)
     document.documentElement.style.visibility = "";
     document.documentElement.style.overflow = "";
+    const antiFlash = document.getElementById("__yotp_anti_flash__");
+    if (antiFlash) antiFlash.remove();
 
     const emailInput = document.getElementById("__yotp_email_input");
     const otpInput = document.getElementById("__yotp_otp_input");

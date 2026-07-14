@@ -33,6 +33,32 @@ def _is_rate_limited(email: str) -> bool:
 
 
 # ---------------------------------------------------------------------------
+# Rate limiting (in-memory) — max 20 OTP requests per IP per hour
+# ---------------------------------------------------------------------------
+_ip_rate_limit = defaultdict(list)
+IP_RATE_LIMIT_WINDOW = 3600  # seconds
+IP_RATE_LIMIT_MAX = 20
+
+def _is_ip_rate_limited(ip: str) -> bool:
+    """Check if an IP has exceeded the overall request rate limit."""
+    if not ip:
+        return False
+    now = time.time()
+    _ip_rate_limit[ip] = [t for t in _ip_rate_limit[ip] if now - t < IP_RATE_LIMIT_WINDOW]
+    if len(_ip_rate_limit[ip]) >= IP_RATE_LIMIT_MAX:
+        return True
+    _ip_rate_limit[ip].append(now)
+    return False
+
+def get_client_ip(request):
+    """Extract the client IP from the request headers."""
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        return x_forwarded_for.split(',')[0].strip()
+    return request.META.get('REMOTE_ADDR')
+
+
+# ---------------------------------------------------------------------------
 # Landing page
 # ---------------------------------------------------------------------------
 def landing_page(request):
@@ -60,7 +86,15 @@ def send_otp(request):
     if not email or '@' not in email:
         return JsonResponse({'error': 'A valid email address is required.'}, status=400)
 
-    # Rate-limit check
+    # IP Rate-limit check
+    client_ip = get_client_ip(request)
+    if _is_ip_rate_limited(client_ip):
+        return JsonResponse(
+            {'error': 'Too many requests from this IP. Please wait and try again later.'},
+            status=429,
+        )
+
+    # Email Rate-limit check
     if _is_rate_limited(email):
         return JsonResponse(
             {'error': 'Too many OTP requests. Please wait a few minutes and try again.'},
